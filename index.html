@@ -1,0 +1,296 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#f9f5ef">
+<title>なっちゃん式 毎日30分 ♡</title>
+<link rel="apple-touch-icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext y='.9em' font-size='90'%3E🌿%3C/text%3E%3C/svg%3E">
+<style>
+  :root{
+    --bg:#f9f5ef; --card:#ffffff; --ink:#2d2a26; --muted:#8a847b;
+    --accent:#c97b63; --accent-soft:#f4e4dd; --line:#ece5dc;
+  }
+  *{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+  html,body{margin:0;background:var(--bg);color:var(--ink);
+    font-family:-apple-system,BlinkMacSystemFont,"Hiragino Sans","Yu Gothic",sans-serif;
+    line-height:1.7;font-size:16px;}
+  .wrap{max-width:560px;margin:0 auto;padding:20px 16px 80px;}
+  header{padding:12px 4px 8px;}
+  h1{font-size:22px;margin:0 0 4px;letter-spacing:.02em;}
+  .sub{color:var(--muted);font-size:13px;margin-bottom:18px;}
+  .week-info{font-size:12px;color:var(--muted);margin-bottom:14px;}
+  .day-tabs{display:flex;gap:6px;overflow-x:auto;padding:4px 0 12px;
+    scrollbar-width:none;-webkit-overflow-scrolling:touch;}
+  .day-tabs::-webkit-scrollbar{display:none}
+  .tab{flex:0 0 auto;padding:10px 14px;border-radius:999px;background:#fff;
+    border:1px solid var(--line);font-size:14px;color:var(--ink);cursor:pointer;
+    font-weight:500;}
+  .tab.active{background:var(--accent);color:#fff;border-color:var(--accent);}
+  .tab.today{box-shadow:0 0 0 2px var(--accent-soft);}
+  .card{background:var(--card);border:1px solid var(--line);border-radius:18px;
+    padding:18px 16px;margin:14px 0;box-shadow:0 1px 0 rgba(0,0,0,.02);}
+  .day-title{font-size:18px;font-weight:600;margin:0 0 2px;}
+  .day-theme{color:var(--accent);font-size:13px;font-weight:500;margin-bottom:14px;}
+  .block{margin:14px 0;}
+  .block-h{font-size:13px;color:var(--muted);font-weight:600;letter-spacing:.05em;
+    text-transform:uppercase;margin-bottom:8px;}
+  .item{display:flex;align-items:center;justify-content:space-between;
+    padding:12px 14px;background:var(--accent-soft);border-radius:12px;
+    margin:6px 0;text-decoration:none;color:var(--ink);font-size:15px;
+    transition:transform .1s;}
+  .item:active{transform:scale(.98);}
+  .item .label{flex:1;padding-right:10px;}
+  .item .min{font-size:12px;color:var(--accent);font-weight:600;
+    background:#fff;padding:3px 8px;border-radius:999px;white-space:nowrap;}
+  .face{background:#eef3ec;}
+  .face .min{color:#5a8a6a;}
+  .note{font-size:13px;color:var(--muted);background:#fff;border:1px dashed var(--line);
+    padding:12px 14px;border-radius:12px;margin-top:12px;}
+  .checkbox-row{display:flex;align-items:center;gap:10px;margin-top:14px;
+    padding:10px 14px;background:#fff;border:1px solid var(--line);border-radius:12px;}
+  .checkbox-row input{width:20px;height:20px;accent-color:var(--accent);}
+  .checkbox-row label{font-size:14px;color:var(--ink);}
+  footer{text-align:center;color:var(--muted);font-size:11px;margin-top:30px;}
+  .day{display:none;}
+  .day.active{display:block;}
+  .quote-card{position:relative;background:linear-gradient(135deg,#fff8f3,#f4e4dd);
+    border:1px solid var(--line);border-radius:18px;padding:22px 20px 20px;
+    margin:8px 0 18px;box-shadow:0 2px 8px rgba(201,123,99,.08);}
+  .quote-mark{position:absolute;top:4px;left:14px;font-size:48px;color:var(--accent);
+    opacity:.25;font-family:Georgia,serif;line-height:1;}
+  .quote-text{font-size:15px;line-height:1.8;color:var(--ink);font-weight:500;
+    padding-left:8px;margin-bottom:10px;}
+  .quote-author{font-size:12px;color:var(--accent);text-align:right;font-weight:600;
+    letter-spacing:.05em;}
+</style>
+</head>
+<body>
+<div class="wrap">
+<header>
+  <h1>🌿 なっちゃん式 毎日30分</h1>
+  <div class="sub">身体20分 + 顔10分 ／ ゆるく続ける ♡</div>
+  <div class="week-info" id="weekInfo">Week of 2026-05-04 〜 2026-05-10</div>
+</header>
+
+<div class="quote-card">
+  <div class="quote-mark">"</div>
+  <div class="quote-text" id="quoteText"></div>
+  <div class="quote-author" id="quoteAuthor"></div>
+</div>
+
+<div class="day-tabs" id="dayTabs"></div>
+
+<div id="days">
+  <!-- 月 -->
+  <section class="day" data-day="月">
+    <div class="card">
+      <div class="day-title">月曜日</div>
+      <div class="day-theme">お腹・お尻</div>
+
+      <div class="block">
+        <div class="block-h">身体 20分</div>
+        <a class="item" href="https://youtu.be/USJgKSLxDRc" target="_blank"><span class="label">KAZUHA 腹筋・ヒップ</span><span class="min">10分</span></a>
+        <a class="item" href="https://www.youtube.com/watch?v=79MPaimw0Ys" target="_blank"><span class="label">インナーマッスル腹筋</span><span class="min">5分</span></a>
+        <a class="item" href="https://youtu.be/DHfqYMts4pE" target="_blank"><span class="label">肩甲骨ストレッチ(短縮)</span><span class="min">5分</span></a>
+      </div>
+      <div class="block">
+        <div class="block-h">顔 10分</div>
+        <a class="item face" href="https://www.youtube.com/watch?v=pQXfXTogz74" target="_blank"><span class="label">間々田佳子 7つの顔ヨガ</span><span class="min">7分</span></a>
+        <a class="item face" href="https://www.youtube.com/watch?v=QWYyDlAv1z4" target="_blank"><span class="label">朝3分ほうれい線</span><span class="min">3分</span></a>
+      </div>
+      <div class="checkbox-row"><input type="checkbox" id="d-月"><label for="d-月">今日のメニュー、できた ♡</label></div>
+    </div>
+  </section>
+
+  <!-- 火 -->
+  <section class="day" data-day="火">
+    <div class="card">
+      <div class="day-title">火曜日</div>
+      <div class="day-theme">上半身ダンベル</div>
+      <div class="block">
+        <div class="block-h">身体 20分</div>
+        <a class="item" href="https://youtu.be/aoep9gQqVTE" target="_blank"><span class="label">ダンベル胸・背中・二の腕</span><span class="min">10分</span></a>
+        <a class="item" href="https://youtu.be/sGerfUS2lfQ" target="_blank"><span class="label">二の腕ダンベル4種目</span><span class="min">6分</span></a>
+        <a class="item" href="https://www.youtube.com/watch?v=HTzaC_1OpZQ" target="_blank"><span class="label">肩首ほぐし(抜粋)</span><span class="min">4分</span></a>
+      </div>
+      <div class="block">
+        <div class="block-h">顔 10分</div>
+        <a class="item face" href="https://www.youtube.com/watch?v=8eODrZ_BSbc" target="_blank"><span class="label">あいうえお小顔ヨガ</span><span class="min">5分</span></a>
+        <a class="item face" href="https://www.youtube.com/watch?v=s7AuURGXbPc" target="_blank"><span class="label">表情筋3分顔痩せ</span><span class="min">3分</span></a>
+      </div>
+      <div class="note">左肩がピリッときたら、その種目はスキップ ♡</div>
+      <div class="checkbox-row"><input type="checkbox" id="d-火"><label for="d-火">今日のメニュー、できた ♡</label></div>
+    </div>
+  </section>
+
+  <!-- 水 -->
+  <section class="day" data-day="水">
+    <div class="card">
+      <div class="day-title">水曜日</div>
+      <div class="day-theme">肩・首リリース日(左肩いたわり)</div>
+      <div class="block">
+        <div class="block-h">身体 20分</div>
+        <a class="item" href="https://youtu.be/DHfqYMts4pE" target="_blank"><span class="label">肩甲骨ストレッチ500万再生</span><span class="min">10分</span></a>
+        <a class="item" href="https://www.youtube.com/watch?v=HTzaC_1OpZQ" target="_blank"><span class="label">ストレートネック筋トレ</span><span class="min">6分</span></a>
+        <div class="note" style="margin-top:6px">深呼吸・首回し ゆっくり 4分</div>
+      </div>
+      <div class="block">
+        <div class="block-h">顔 10分</div>
+        <a class="item face" href="https://www.youtube.com/watch?v=n-_FnaqCKhY" target="_blank"><span class="label">リフトアップ小顔体操</span><span class="min">7分</span></a>
+        <a class="item face" href="https://www.youtube.com/watch?v=pQXfXTogz74" target="_blank"><span class="label">間々田顔ヨガ(抜粋)</span><span class="min">3分</span></a>
+      </div>
+      <div class="checkbox-row"><input type="checkbox" id="d-水"><label for="d-水">今日のメニュー、できた ♡</label></div>
+    </div>
+  </section>
+
+  <!-- 木 -->
+  <section class="day" data-day="木">
+    <div class="card">
+      <div class="day-title">木曜日</div>
+      <div class="day-theme">背中・姿勢</div>
+      <div class="block">
+        <div class="block-h">身体 20分</div>
+        <a class="item" href="https://www.youtube.com/watch?v=b17YS3l1wOc" target="_blank"><span class="label">背筋ダンベル(2セット)</span><span class="min">6分</span></a>
+        <a class="item" href="https://youtu.be/OR_BfYC0rFM" target="_blank"><span class="label">上半身ベルダンベル</span><span class="min">7分</span></a>
+        <a class="item" href="https://www.youtube.com/watch?v=gZBHZ8Qdkag" target="_blank"><span class="label">スマホ首・巻き肩リセット</span><span class="min">7分</span></a>
+      </div>
+      <div class="block">
+        <div class="block-h">顔 10分</div>
+        <a class="item face" href="https://www.youtube.com/watch?v=QWYyDlAv1z4" target="_blank"><span class="label">朝3分ほうれい線</span><span class="min">3分</span></a>
+        <a class="item face" href="https://www.youtube.com/watch?v=8eODrZ_BSbc" target="_blank"><span class="label">あいうえお小顔ヨガ</span><span class="min">5分</span></a>
+        <div class="note" style="margin-top:6px">あいうえお復習 鏡見ながら 2分</div>
+      </div>
+      <div class="checkbox-row"><input type="checkbox" id="d-木"><label for="d-木">今日のメニュー、できた ♡</label></div>
+    </div>
+  </section>
+
+  <!-- 金 -->
+  <section class="day" data-day="金">
+    <div class="card">
+      <div class="day-title">金曜日</div>
+      <div class="day-theme">二の腕・デコルテ</div>
+      <div class="block">
+        <div class="block-h">身体 20分</div>
+        <a class="item" href="https://youtu.be/sGerfUS2lfQ" target="_blank"><span class="label">二の腕ダンベル4種目</span><span class="min">6分</span></a>
+        <a class="item" href="https://www.youtube.com/watch?v=gZBHZ8Qdkag" target="_blank"><span class="label">スマホ首・巻き肩リセット</span><span class="min">7分</span></a>
+        <a class="item" href="https://youtu.be/aoep9gQqVTE" target="_blank"><span class="label">ダンベル胸・背中・二の腕(抜粋)</span><span class="min">7分</span></a>
+      </div>
+      <div class="block">
+        <div class="block-h">顔 10分</div>
+        <a class="item face" href="https://www.youtube.com/watch?v=pQXfXTogz74" target="_blank"><span class="label">間々田佳子 7つの顔ヨガ</span><span class="min">7分</span></a>
+        <a class="item face" href="https://www.youtube.com/watch?v=s7AuURGXbPc" target="_blank"><span class="label">表情筋3分顔痩せ</span><span class="min">3分</span></a>
+      </div>
+      <div class="checkbox-row"><input type="checkbox" id="d-金"><label for="d-金">今日のメニュー、できた ♡</label></div>
+    </div>
+  </section>
+
+  <!-- 土 -->
+  <section class="day" data-day="土">
+    <div class="card">
+      <div class="day-title">土曜日</div>
+      <div class="day-theme">下半身・全身</div>
+      <div class="block">
+        <div class="block-h">身体 20分</div>
+        <a class="item" href="https://www.youtube.com/watch?v=0HIaPspC7lQ" target="_blank"><span class="label">10種目10分(腹筋・お尻・内もも)</span><span class="min">10分</span></a>
+        <a class="item" href="https://youtu.be/USJgKSLxDRc" target="_blank"><span class="label">KAZUHA 腹筋・ヒップ</span><span class="min">10分</span></a>
+      </div>
+      <div class="block">
+        <div class="block-h">顔 10分</div>
+        <a class="item face" href="https://www.youtube.com/watch?v=n-_FnaqCKhY" target="_blank"><span class="label">リフトアップ小顔体操</span><span class="min">7分</span></a>
+        <a class="item face" href="https://www.youtube.com/watch?v=QWYyDlAv1z4" target="_blank"><span class="label">朝3分ほうれい線</span><span class="min">3分</span></a>
+      </div>
+      <div class="checkbox-row"><input type="checkbox" id="d-土"><label for="d-土">今日のメニュー、できた ♡</label></div>
+    </div>
+  </section>
+
+  <!-- 日 -->
+  <section class="day" data-day="日">
+    <div class="card">
+      <div class="day-title">日曜日</div>
+      <div class="day-theme">回復・ストレッチ日</div>
+      <div class="block">
+        <div class="block-h">身体 20分</div>
+        <a class="item" href="https://youtu.be/DHfqYMts4pE" target="_blank"><span class="label">肩甲骨ストレッチ500万再生</span><span class="min">10分</span></a>
+        <a class="item" href="https://www.youtube.com/watch?v=HTzaC_1OpZQ" target="_blank"><span class="label">ストレートネック筋トレ</span><span class="min">6分</span></a>
+        <div class="note" style="margin-top:6px">寝たまま深呼吸 4分</div>
+      </div>
+      <div class="block">
+        <div class="block-h">顔 10分</div>
+        <a class="item face" href="https://www.youtube.com/watch?v=8eODrZ_BSbc" target="_blank"><span class="label">あいうえお小顔ヨガ</span><span class="min">5分</span></a>
+        <a class="item face" href="https://www.youtube.com/watch?v=n-_FnaqCKhY" target="_blank"><span class="label">リフトアップ(抜粋)優しく</span><span class="min">5分</span></a>
+      </div>
+      <div class="note">回復日。痛むところは触らない ♡</div>
+      <div class="checkbox-row"><input type="checkbox" id="d-日"><label for="d-日">今日のメニュー、できた ♡</label></div>
+    </div>
+  </section>
+</div>
+
+<footer>♡ 続けることが一番のアンチエイジング ♡<br>updated by なっちゃん</footer>
+</div>
+
+<script>
+  const quotes=[
+    {t:"自分の人生を生きていない人間は、他人の人生を批評することで時間を潰す。",a:"オスカー・ワイルド"},
+    {t:"何かを始めるのに遅すぎることはない。",a:"マーク・トウェイン"},
+    {t:"未来を予測する最良の方法は、それを創り出すことだ。",a:"ピーター・ドラッカー"},
+    {t:"人生で最も大切なのは、何を持っているかではなく、誰であるかだ。",a:"ココ・シャネル"},
+    {t:"年を重ねることは、若さを失うことではない。新しい段階の始まりだ。",a:"ベティ・フリーダン"},
+    {t:"美しさは、自分らしくあると決めた瞬間から始まる。",a:"ココ・シャネル"},
+    {t:"小さなことを積み重ねることが、とんでもないところに行くただ一つの道。",a:"イチロー"},
+    {t:"あなたが今日できる最高のことは、自分自身に親切にすることだ。",a:"ルイーズ・ヘイ"},
+    {t:"変化を望むなら、自らが変化となれ。",a:"マハトマ・ガンジー"},
+    {t:"幸せは習慣である。それを身につけよ。",a:"ハバート"},
+    {t:"今日という日は、残りの人生の最初の日である。",a:"チャールズ・ディードリッヒ"},
+    {t:"人は誰でも、自分の中に太陽を持っている。ただ輝かせるのを忘れているだけ。",a:"ソクラテス"},
+    {t:"完璧を目指すよりまず終わらせろ。",a:"マーク・ザッカーバーグ"},
+    {t:"人生において重要なのは、ただ生きることではなく、よく生きることである。",a:"ソクラテス"},
+    {t:"優しさは、聞こえない人にも見え、見えない人にも聞こえる言語である。",a:"マーク・トウェイン"},
+    {t:"健康は富にまさる。",a:"ロバート・バートン"},
+    {t:"継続は力なり。",a:"住岡夜晃"},
+    {t:"夢を見ることができれば、それを実現することもできる。",a:"ウォルト・ディズニー"},
+    {t:"道は近くにあり、然るに之を遠きに求む。",a:"孟子"},
+    {t:"真の強さとは、自分自身を制御できることである。",a:"老子"},
+    {t:"美しい肌は、内側からの平和の表れ。",a:"オードリー・ヘップバーン"},
+    {t:"年齢は、心の状態である。",a:"サミュエル・ウルマン"},
+    {t:"明日死ぬかのように生きよ。永遠に生きるかのように学べ。",a:"マハトマ・ガンジー"},
+    {t:"幸福とは、健康と物忘れの早さである。",a:"アルベルト・シュバイツァー"},
+    {t:"千里の道も一歩から。",a:"老子"},
+    {t:"今日できることを明日に延ばすな。",a:"ベンジャミン・フランクリン"},
+    {t:"あなたの時間は限られている。だから他人の人生を生きて無駄にするな。",a:"スティーブ・ジョブズ"},
+    {t:"成功とは、情熱を失わずに失敗から失敗へと進む能力である。",a:"ウィンストン・チャーチル"},
+    {t:"人生は自転車に乗るようなもの。バランスを保つには動き続けなければならない。",a:"アインシュタイン"},
+    {t:"自分自身を愛することが、生涯続くロマンスの始まりだ。",a:"オスカー・ワイルド"},
+    {t:"運動は薬であり、栄養は薬である。",a:"ヒポクラテス"}
+  ];
+  const today=new Date();
+  const dayOfYear=Math.floor((today-new Date(today.getFullYear(),0,0))/86400000);
+  const q=quotes[dayOfYear%quotes.length];
+  document.getElementById("quoteText").textContent=q.t;
+  document.getElementById("quoteAuthor").textContent="— "+q.a;
+
+  const days=["月","火","水","木","金","土","日"];
+  const tabs=document.getElementById("dayTabs");
+  const today=days[(new Date().getDay()+6)%7];
+  days.forEach(d=>{
+    const b=document.createElement("button");
+    b.className="tab"+(d===today?" today":"");
+    b.textContent=d;
+    b.onclick=()=>show(d);
+    tabs.appendChild(b);
+  });
+  function show(d){
+    document.querySelectorAll(".day").forEach(s=>s.classList.toggle("active",s.dataset.day===d));
+    document.querySelectorAll(".tab").forEach(t=>t.classList.toggle("active",t.textContent===d));
+  }
+  show(today);
+  // checkbox persistence (localStorage, daily reset)
+  const wkKey="nacchan-"+new Date().toISOString().slice(0,10);
+  document.querySelectorAll('input[type=checkbox]').forEach(cb=>{
+    const k=wkKey+"-"+cb.id;
+    cb.checked=localStorage.getItem(k)==="1";
+    cb.addEventListener("change",()=>localStorage.setItem(k,cb.checked?"1":"0"));
+  });
+</script>
+</body>
+</html>
