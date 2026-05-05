@@ -263,15 +263,15 @@
     {t:"自分自身を愛することが、生涯続くロマンスの始まりだ。",a:"オスカー・ワイルド"},
     {t:"運動は薬であり、栄養は薬である。",a:"ヒポクラテス"}
   ];
-  const today=new Date();
-  const dayOfYear=Math.floor((today-new Date(today.getFullYear(),0,0))/86400000);
+  const now=new Date();
+  const dayOfYear=Math.floor((now-new Date(now.getFullYear(),0,0))/86400000);
   const q=quotes[dayOfYear%quotes.length];
   document.getElementById("quoteText").textContent=q.t;
   document.getElementById("quoteAuthor").textContent="— "+q.a;
 
   const days=["月","火","水","木","金","土","日"];
   const tabs=document.getElementById("dayTabs");
-  const today=days[(new Date().getDay()+6)%7];
+  const today=days[(now.getDay()+6)%7];
   days.forEach(d=>{
     const b=document.createElement("button");
     b.className="tab"+(d===today?" today":"");
