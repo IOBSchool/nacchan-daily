@@ -51,6 +51,17 @@
     padding:10px 14px;background:#fff;border:1px solid var(--line);border-radius:12px;}
   .checkbox-row input{width:20px;height:20px;accent-color:var(--accent);}
   .checkbox-row label{font-size:14px;color:var(--ink);}
+  .feedback{margin-top:14px;padding:14px;background:#fff;border:1px solid var(--line);
+    border-radius:12px;}
+  .feedback-h{font-size:13px;color:var(--muted);font-weight:600;margin-bottom:8px;}
+  .feedback textarea{width:100%;min-height:80px;border:1px solid var(--line);border-radius:8px;
+    padding:10px;font-family:inherit;font-size:14px;line-height:1.5;resize:vertical;
+    background:#faf7f2;color:var(--ink);box-sizing:border-box;}
+  .feedback textarea:focus{outline:none;border-color:var(--accent);}
+  .send-btn{display:inline-block;margin-top:8px;padding:10px 18px;background:var(--accent);
+    color:#fff;border:none;border-radius:999px;font-size:14px;font-weight:600;
+    text-decoration:none;cursor:pointer;}
+  .send-btn:active{opacity:.85;}
   footer{text-align:center;color:var(--muted);font-size:11px;margin-top:30px;}
   .day{display:none;}
   .day.active{display:block;}
@@ -285,6 +296,35 @@
     const k=wkKey+"-"+cb.id;
     cb.checked=localStorage.getItem(k)==="1";
     cb.addEventListener("change",()=>localStorage.setItem(k,cb.checked?"1":"0"));
+  });
+
+  // Inject feedback box into every day card
+  const FB_TO="organiclifeingermany@gmail.com";
+  document.querySelectorAll(".day").forEach(sec=>{
+    const d=sec.dataset.day;
+    const card=sec.querySelector(".card");
+    const wrap=document.createElement("div");
+    wrap.className="feedback";
+    wrap.innerHTML=`
+      <div class="feedback-h">📝 なっちゃんへフィードバック</div>
+      <textarea id="fb-${d}" placeholder="きつかった/楽だった/動画の感想/明日変えてほしいこと…なんでも♡"></textarea>
+      <button class="send-btn" data-day="${d}">メールで送る ✉️</button>
+    `;
+    card.appendChild(wrap);
+    // localStorage persistence
+    const ta=wrap.querySelector("textarea");
+    const fbKey=wkKey+"-fb-"+d;
+    ta.value=localStorage.getItem(fbKey)||"";
+    ta.addEventListener("input",()=>localStorage.setItem(fbKey,ta.value));
+    // mailto on click
+    wrap.querySelector(".send-btn").addEventListener("click",()=>{
+      const body=ta.value.trim();
+      if(!body){alert("コメントを書いてからね ♡");return;}
+      const dt=new Date().toISOString().slice(0,10);
+      const subj=`なっちゃんFB ${d}曜 ${dt}`;
+      const url=`mailto:${FB_TO}?subject=${encodeURIComponent(subj)}&body=${encodeURIComponent(body)}`;
+      location.href=url;
+    });
   });
 </script>
 </body>
